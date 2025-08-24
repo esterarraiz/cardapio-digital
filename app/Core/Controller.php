@@ -1,17 +1,10 @@
 <?php
-// Em: app/Core/Controller.php
 
-namespace App\Core; // <-- ESSA LINHA É CRUCIAL
+namespace App\Core; 
 
-/**
- * Controller Base
- * Todos os outros controllers estenderão esta classe.
- */
-class Controller // <-- E O NOME DA CLASSE TAMBÉM
+class Controller 
 {
-    /**
-     * Renderiza um arquivo de view.
-     */
+    
     public function view($view, $data = [])
     {
         $viewFile = __DIR__ . '/../Views/' . $view . '.php';
