@@ -3,7 +3,8 @@
     "description": "Projeto de cardapio digital em PHP.",
     "autoload": {
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Config\\": "config/"
         }
     },
     "require": {}

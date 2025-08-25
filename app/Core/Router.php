@@ -12,6 +12,7 @@ class Router
         // Rota principal da aplicação
         $this->add('/', ['controller' => 'HomeController', 'action' => 'index']);
         $this->add('/produtos/criar', ['controller' => 'ProdutoController', 'action' => 'criar']);
+        $this->add('/produtos/salvar', ['controller' => 'ProdutoController', 'action' => 'salvar']);
 
         
     }
