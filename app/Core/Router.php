@@ -1,5 +1,4 @@
 <?php
-// Em: app/Core/Router.php
 
 namespace App\Core;
 
@@ -12,9 +11,9 @@ class Router
     {
         // Rota principal da aplicação
         $this->add('/', ['controller' => 'HomeController', 'action' => 'index']);
+        $this->add('/produtos/criar', ['controller' => 'ProdutoController', 'action' => 'criar']);
+
         
-        // Adicione outras rotas de exemplo se quiser
-        // $this->add('/produtos', ['controller' => 'ProdutoController', 'action' => 'listar']);
     }
 
     public function add($route, $params = [])
@@ -37,12 +36,9 @@ class Router
 
     public function dispatch()
     {
-        // AQUI ESTÁ A CORREÇÃO:
-        // Usamos parse_url para pegar o caminho da URL de forma segura,
-        // o que garante que a barra "/" da página inicial seja preservada.
+
         $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-        // O resto do código permanece, mas agora ele recebe a URL correta.
         $url = $this->removeQueryStringVariables($url);
 
         if ($this->match($url)) {
