@@ -27,6 +27,7 @@ ini_set('display_errors', 0);
         <header class="text-center mb-8">
             <h1 class="text-5xl font-bold text-neutral-dark mt-4">Nosso Cardápio</h1>
         </header>
+
         <div class="mb-6 text-right">
             <a href="/produtos/criar" 
                class="inline-block bg-brand-orange text-white font-bold py-2 px-5 rounded-lg hover:bg-orange-600 transition-colors shadow-sm">
@@ -35,6 +36,24 @@ ini_set('display_errors', 0);
         </div>
 
         <main class="space-y-8">
+
+           
+            <?php if (isset($_GET['status'])): ?>
+                <?php if ($_GET['status'] === 'sucesso'): ?>
+                    <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-lg mb-4" role="alert">
+                        Produto salvo com sucesso!
+                    </div>
+                <?php elseif ($_GET['status'] === 'excluido'): ?>
+                    <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-lg mb-4" role="alert">
+                        Produto excluído com sucesso!
+                    </div>
+                <?php elseif ($_GET['status'] === 'erro'): ?>
+                    <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-lg mb-4" role="alert">
+                        Ocorreu um erro ao tentar processar a ação.
+                    </div>
+                <?php endif; ?>
+            <?php endif; ?>
+
             <?php if (isset($erro_mensagem)): ?>
                 <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-lg" role="alert">
                     <p class="font-bold">Ocorreu um Erro</p>
@@ -66,12 +85,12 @@ ini_set('display_errors', 0);
                                         <?php endif; ?>
                                         <div class="mt-4 flex items-center space-x-2">
                                             <a href="/produtos/editar/<?php echo $item['id']; ?>" 
-                                            class="text-xs font-semibold bg-slate-200 text-slate-700 hover:bg-slate-300 rounded-md py-1 px-3 transition-colors">
+                                               class="text-xs font-semibold bg-slate-200 text-slate-700 hover:bg-slate-300 rounded-md py-1 px-3 transition-colors">
                                                 Editar
                                             </a>
                                             <a href="/produtos/excluir/<?php echo $item['id']; ?>" 
-                                            class="text-xs font-semibold bg-red-100 text-red-700 hover:bg-red-200 rounded-md py-1 px-3 transition-colors" 
-                                            onclick="return confirm('Tem certeza que deseja excluir este item?');">
+                                               class="text-xs font-semibold bg-red-100 text-red-700 hover:bg-red-200 rounded-md py-1 px-3 transition-colors" 
+                                               onclick="return confirm('Tem certeza que deseja excluir este item?');">
                                                 Excluir
                                             </a>
                                         </div>
@@ -82,6 +101,7 @@ ini_set('display_errors', 0);
                     </section>
                 <?php endforeach; ?>
             <?php endif; ?>
+
         </main>
     </div>
 </body>

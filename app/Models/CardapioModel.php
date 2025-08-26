@@ -11,14 +11,11 @@ class CardapioModel
 
     public function __construct()
     {
-        // Pega a conexão com o banco de dados
+        
         $this->db = Database::getConnection();
     }
 
-    /**
-     * Busca todos os itens disponíveis do cardápio e os agrupa por categoria.
-     * @return array Retorna um array de categorias, cada uma contendo seus itens.
-     */
+
     public function buscarItensAgrupados(): array
     {
         $sql = "
@@ -43,7 +40,7 @@ class CardapioModel
             $stmt = $this->db->query($sql);
             $cardapio_itens = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            // Agrupa os resultados pela chave 'categoria_nome'
+           
             $cardapio_agrupado = [];
             foreach ($cardapio_itens as $item) {
                 $cardapio_agrupado[$item['categoria_nome']][] = $item;
@@ -52,9 +49,29 @@ class CardapioModel
             return $cardapio_agrupado;
 
         } catch (PDOException $e) {
-            // Em uma aplicação real, logar o erro é a melhor prática.
+            
             error_log("Erro ao buscar o cardápio: " . $e->getMessage());
-            return []; // Retorna um array vazio em caso de erro para não quebrar a view.
+            return []; 
         }
     }
+    
+    public function excluirProduto(int $id): bool
+{
+    $sql = "DELETE FROM cardapio_itens WHERE id = ?";
+    try {
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([$id]);
+    } catch (\PDOException $e) {
+        error_log("Erro ao excluir produto: " . $e->getMessage());
+        return false;
+    }
+}
+
+public function listarTodos(): array
+{
+    $sql = "SELECT id, nome, descricao, preco, imagem_url FROM cardapio_itens ORDER BY id DESC";
+    $stmt = $this->db->query($sql); 
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+}
+
 }
