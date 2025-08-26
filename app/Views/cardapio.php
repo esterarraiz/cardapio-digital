@@ -1,11 +1,13 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 0);
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nosso Cardápio - PedeAI</title>
+    <title>Nosso Cardápio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
@@ -16,14 +18,21 @@
         }
         .text-brand-orange { color: var(--brand-orange); }
         .text-brand-green { color: var(--brand-green); }
+        .bg-brand-orange { background-color: var(--brand-orange); }
     </style>
 </head>
 <body class="bg-neutral-lightest font-sans">
 
     <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-4xl">
         <header class="text-center mb-8">
-            <h1 class="text-5xl font-bold text-neutral-dark mt-4">Cardápio</h1>
+            <h1 class="text-5xl font-bold text-neutral-dark mt-4">Nosso Cardápio</h1>
         </header>
+        <div class="mb-6 text-right">
+            <a href="/produtos/criar" 
+               class="inline-block bg-brand-orange text-white font-bold py-2 px-5 rounded-lg hover:bg-orange-600 transition-colors shadow-sm">
+                + Adicionar Novo Produto
+            </a>
+        </div>
 
         <main class="space-y-8">
             <?php if (isset($erro_mensagem)): ?>
@@ -55,6 +64,17 @@
                                         <?php if (!empty($item['descricao'])): ?>
                                             <p class="text-neutral-medium text-sm mt-1"><?php echo htmlspecialchars($item['descricao']); ?></p>
                                         <?php endif; ?>
+                                        <div class="mt-4 flex items-center space-x-2">
+                                            <a href="/produtos/editar/<?php echo $item['id']; ?>" 
+                                            class="text-xs font-semibold bg-slate-200 text-slate-700 hover:bg-slate-300 rounded-md py-1 px-3 transition-colors">
+                                                Editar
+                                            </a>
+                                            <a href="/produtos/excluir/<?php echo $item['id']; ?>" 
+                                            class="text-xs font-semibold bg-red-100 text-red-700 hover:bg-red-200 rounded-md py-1 px-3 transition-colors" 
+                                            onclick="return confirm('Tem certeza que deseja excluir este item?');">
+                                                Excluir
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             <?php endforeach; ?>

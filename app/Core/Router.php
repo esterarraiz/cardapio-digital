@@ -5,13 +5,14 @@ namespace App\Core;
 class Router
 {
     protected $routes = [];
-
     protected $params = [];
 
     public function __construct()
     {
-
-        $this->add('/cardapio', ['controller' => 'CardViewController', 'action' => 'index']);
+        $this->add('/', ['controller' => 'HomeController', 'action' => 'index']);
+        $this->add('/produtos', ['controller' => 'CardViewController', 'action' => 'index']);
+        $this->add('/produtos/criar', ['controller' => 'ProdutoController', 'action' => 'criar']);
+        
     }
 
     public function add($route, $params = [])
@@ -32,12 +33,12 @@ class Router
         return false;
     }
 
-
     public function dispatch()
     {
+
         $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        
-        $url = $this->removeSubdirectory($url);
+
+        $url = $this->removeQueryStringVariables($url);
 
         if ($this->match($url)) {
             $controller = "App\\Controllers\\" . $this->params['controller'];
@@ -46,25 +47,24 @@ class Router
                 $controller_object = new $controller();
                 $action = $this->params['action'];
 
-                if (is_callable([$controller_object, $action])) {
+                if (method_exists($controller_object, $action)) {
                     $controller_object->$action();
                 } else {
-                    echo "Ação '{$action}' não encontrada no controlador '{$controller}'";
+                    echo "Action '$action' não encontrada no controller '$controller'";
                 }
             } else {
-                echo "Controlador '{$controller}' não encontrado.";
+                echo "Controller '$controller' não encontrado.";
             }
         } else {
-            echo "Página não encontrada (Erro 404) para o URL: " . htmlspecialchars($url);
+            echo "Página não encontrada (Erro 404) para a URL: " . htmlspecialchars($url);
         }
     }
-    
 
-    protected function removeSubdirectory($url)
+    protected function removeQueryStringVariables($url)
     {
-        $project_folder = basename(dirname(__DIR__, 2)); 
-        if (strpos($url, $project_folder) !== false) {
-            return preg_replace('/^\/' . preg_quote($project_folder, '/') . '/', '', $url);
+        if ($url != '') {
+            $parts = explode('?', $url, 2);
+            $url = $parts[0];
         }
         return $url;
     }
