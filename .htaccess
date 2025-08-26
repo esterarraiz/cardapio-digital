@@ -1,35 +1,17 @@
-# Em: .htaccess (na raiz do projeto)
-
-# Ativa o motor de reescrita de URL do Apache
 RewriteEngine On
 
-# Impede que os utilizadores possam ver a lista de ficheiros de um diretório
 Options -Indexes
 
-# ----------------------------------------------------------------------
-# REGRA PRINCIPAL DO FRONT CONTROLLER
-# ----------------------------------------------------------------------
-# Esta regra redireciona todas as requisições para o ficheiro public/index.php,
-# a menos que o ficheiro ou diretório solicitado já exista.
 
-# Condição: Se o ficheiro solicitado NÃO for um ficheiro real...
 RewriteCond %{REQUEST_FILENAME} !-f
-# Condição: E se o ficheiro solicitado NÃO for um diretório real...
 RewriteCond %{REQUEST_FILENAME} !-d
 
-# Regra: Redireciona a requisição para public/index.php
 RewriteRule . public/index.php [L]
 
-# ----------------------------------------------------------------------
-# SEGURANÇA ADICIONAL
-# ----------------------------------------------------------------------
-
-# Protege o próprio ficheiro .htaccess de ser acedido pelo navegador
 <Files .htaccess>
     Require all denied
 </Files>
 
-# Protege ficheiros sensíveis
 <Files ~ "\.(env|log|ini)$">
     Require all denied
 </Files>
