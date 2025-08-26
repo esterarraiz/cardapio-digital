@@ -97,9 +97,9 @@ class ProdutoController extends Controller
         $sucesso = $cardapioModel->excluirProduto((int)$id); 
 
         if ($sucesso) {
-            header('Location: /produtos/listar?status=excluido');
+            header('Location: /produtos?status=excluido');
         } else {
-            header('Location: /produtos/listar?status=erro');
+            header('Location: /produtos?status=erro');
         }
         exit;
     }

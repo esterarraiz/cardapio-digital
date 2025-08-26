@@ -13,15 +13,11 @@ class Router
         $this->add('/', ['controller' => 'HomeController', 'action' => 'index']);
 
         // Rotas de produtos
-        $this->add('/produtos', ['controller' => 'CardViewController', 'action' => 'index']);
+        $this->add('/cardapio', ['controller' => 'CardViewController', 'action' => 'index']);
         $this->add('/produtos/criar', ['controller' => 'ProdutoController', 'action' => 'criar']);
         $this->add('/produtos/salvar', ['controller' => 'ProdutoController', 'action' => 'salvar']);
-
-        // Rota para excluir produto passando o ID
         $this->add('/produtos/excluir/{id}', ['controller' => 'ProdutoController', 'action' => 'excluir']);
-
-        // Rota para listar todos os produtos
-        $this->add('/produtos/listar', ['controller' => 'ProdutoController', 'action' => 'listar']);
+        $this->add('/produtos', ['controller' => 'ProdutoController', 'action' => 'listar']);
     }
 
     public function add($route, $params = [])
