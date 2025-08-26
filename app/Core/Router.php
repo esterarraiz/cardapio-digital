@@ -15,6 +15,7 @@ class Router
         // Rotas de produtos
         $this->add('/produtos', ['controller' => 'CardViewController', 'action' => 'index']);
         $this->add('/produtos/criar', ['controller' => 'ProdutoController', 'action' => 'criar']);
+        $this->add('/produtos/salvar', ['controller' => 'ProdutoController', 'action' => 'salvar']);
 
         // Rota para excluir produto passando o ID
         $this->add('/produtos/excluir/{id}', ['controller' => 'ProdutoController', 'action' => 'excluir']);
