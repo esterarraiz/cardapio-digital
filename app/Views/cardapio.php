@@ -1,9 +1,4 @@
 <?php
-/**
- * Em: app/Views/cardapio.php
- * Esta é a View. A sua única responsabilidade é exibir os dados
- * que foram preparados e entregues pelo Controlador.
- */
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -49,7 +44,6 @@
                         <div class="space-y-4">
                             <?php foreach ($itens as $item): ?>
                                 <div class="bg-white p-4 rounded-lg shadow-sm flex items-start space-x-4">
-                                    <!-- IMAGEM ATUALIZADA: Usa o URL do banco de dados ou um placeholder se não houver imagem. -->
                                     <img src="<?php echo htmlspecialchars($item['imagem_url'] ?? 'https://placehold.co/100x100/cccccc/ffffff?text=Item'); ?>" 
                                          alt="<?php echo htmlspecialchars($item['nome']); ?>" 
                                          class="w-20 h-20 object-cover rounded-md flex-shrink-0">
