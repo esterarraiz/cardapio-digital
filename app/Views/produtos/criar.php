@@ -48,7 +48,7 @@
     </div>
 
     <script>
-        // Pequeno script para mostrar o nome do arquivo selecionado
+        
         const inputFile = document.getElementById('imagem');
         const fileNameSpan = document.querySelector('.file-name');
         

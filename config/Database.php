@@ -1,5 +1,5 @@
 <?php
-// Em: config/Database.php
+
 
 namespace Config;
 
