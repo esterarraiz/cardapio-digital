@@ -1,7 +1,9 @@
 <?php
-require_once __DIR__ . '/../controllers/CardViewController.php';
-$cardapio_agrupado = getCardapioPublico();
-
+/**
+ * Em: app/Views/cardapio.php
+ * Esta é a View. A sua única responsabilidade é exibir os dados
+ * que foram preparados e entregues pelo Controlador.
+ */
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -25,12 +27,16 @@ $cardapio_agrupado = getCardapioPublico();
 
     <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-4xl">
         <header class="text-center mb-8">
-            <img src="../Imagens/logo.png" alt="Logo PedeAI" class="mx-auto h-80 w-80">
-            <h1 class="text-4xl font-bold text-neutral-dark mt-4">Nosso Cardápio</h1>
+            <h1 class="text-5xl font-bold text-neutral-dark mt-4">Cardápio</h1>
         </header>
 
         <main class="space-y-8">
-            <?php if (empty($cardapio_agrupado)): ?>
+            <?php if (isset($erro_mensagem)): ?>
+                <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-lg" role="alert">
+                    <p class="font-bold">Ocorreu um Erro</p>
+                    <p><?php echo htmlspecialchars($erro_mensagem); ?></p>
+                </div>
+            <?php elseif (empty($cardapio_agrupado)): ?>
                 <div class="bg-white p-6 rounded-xl shadow-md text-center">
                     <p class="text-neutral-medium">O nosso cardápio está a ser atualizado. Volte em breve!</p>
                 </div>
@@ -43,13 +49,18 @@ $cardapio_agrupado = getCardapioPublico();
                         <div class="space-y-4">
                             <?php foreach ($itens as $item): ?>
                                 <div class="bg-white p-4 rounded-lg shadow-sm flex items-start space-x-4">
-                                    <img src="<?php echo htmlspecialchars('https://placehold.co/100x100/cccccc/ffffff?text=Item'); ?>" alt="<?php echo htmlspecialchars($item['nome']); ?>" class="w-20 h-20 object-cover rounded-md flex-shrink-0">
+                                    <!-- IMAGEM ATUALIZADA: Usa o URL do banco de dados ou um placeholder se não houver imagem. -->
+                                    <img src="<?php echo htmlspecialchars($item['imagem_url'] ?? 'https://placehold.co/100x100/cccccc/ffffff?text=Item'); ?>" 
+                                         alt="<?php echo htmlspecialchars($item['nome']); ?>" 
+                                         class="w-20 h-20 object-cover rounded-md flex-shrink-0">
                                     <div class="flex-grow">
                                         <div class="flex justify-between items-baseline">
                                             <h3 class="font-bold text-lg text-neutral-dark"><?php echo htmlspecialchars($item['nome']); ?></h3>
-                                            <p class="font-semibold text-brand-green">R$ <?php echo number_format($item['preco'], 2, ',', '.'); ?></p>
+                                            <p class="font-semibold text-brand-green flex-shrink-0 ml-4">R$ <?php echo number_format($item['preco'], 2, ',', '.'); ?></p>
                                         </div>
-                                        <p class="text-neutral-medium text-sm mt-1"><?php echo htmlspecialchars($item['descricao']); ?></p>
+                                        <?php if (!empty($item['descricao'])): ?>
+                                            <p class="text-neutral-medium text-sm mt-1"><?php echo htmlspecialchars($item['descricao']); ?></p>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
