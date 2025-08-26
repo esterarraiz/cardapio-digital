@@ -1,11 +1,12 @@
 <?php
-// Em: app/Controllers/ProdutoController.php
+
 
 namespace App\Controllers;
 
 use App\Models\ProdutoModel;
 use App\Core\Controller;
 use App\Models\CategoriaModel;
+use App\Models\CardapioModel;
 
 class ProdutoController extends Controller
 {
@@ -29,6 +30,7 @@ class ProdutoController extends Controller
             http_response_code(405); // Código para "Método não permitido"
             die("Acesso negado. Esta rota só pode ser acessada via POST.");
         }
+
 
         // 2. OBTER E VALIDAR OS DADOS DO FORMULÁRIO
         // Funções como trim() e filter_var() limpam e validam os dados.
@@ -87,4 +89,26 @@ class ProdutoController extends Controller
         exit; // Encerra o script para garantir o redirecionamento.
     }
     
+
+
+    public function excluir($id)
+    {
+        $cardapioModel = new CardapioModel();
+        $sucesso = $cardapioModel->excluirProduto((int)$id); 
+
+        if ($sucesso) {
+            header('Location: /produtos/listar?status=excluido');
+        } else {
+            header('Location: /produtos/listar?status=erro');
+        }
+        exit;
+    }
+
+    public function listar()
+    {
+        $cardapioModel = new CardapioModel();
+        $produtos = $cardapioModel->listarTodos(); 
+        $this->view('produtos/listar', ['produtos' => $produtos]);
+    }
 }
+
