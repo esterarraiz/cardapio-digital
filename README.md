@@ -44,11 +44,11 @@ O principal objetivo deste projeto é aplicar os conceitos e práticas de Engenh
 
 ## 🔄 Ciclo de Revisão
 
-### Arthur Vinicíus ➡️ revisa o código da Ester  
-### Ester ➡️ revisa o código do Jorge  
-### Jorge ➡️ revisa o código do Matheus  
-### Matheus ➡️ revisa o código da Vitória  
-### Vitória ➡️ revisa o código do Arthur
+- Arthur Vinicíus ➡️ revisa o código da Ester  
+- Ester ➡️ revisa o código do Jorge  
+- Jorge ➡️ revisa o código do Matheus  
+- Matheus ➡️ revisa o código da Vitória  
+- Vitória ➡️ revisa o código do Arthur
 
 ## 💻 Tecnologias Utilizadas
 - **Backend:** PHP 8.1+  
