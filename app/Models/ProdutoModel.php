@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Models; // <-- CORREÇÃO: Usar barra invertida '\'
+namespace App\Models; 
 
-use Config\Database; // Importa sua classe de conexão com o banco de dados
+use Config\Database; 
 use PDO;
 use PDOException;
 
@@ -10,37 +10,26 @@ class ProdutoModel
 {
     private $pdo;
 
-    /**
-     * O construtor é chamado automaticamente quando você cria um novo objeto ProdutoModel.
-     * Ele estabelece a conexão com o banco de dados.
-     */
     public function __construct()
     {
-        // Chama o método estático 'conectar' da sua classe de configuração de banco de dados
          $this->pdo = Database::getConnection();
     }
 
-    /**
-     * Insere um novo produto na tabela 'produtos' do banco de dados.
-     * Utiliza prepared statements para prevenir ataques de SQL Injection.
-     *
-     * @param string $nome O nome do produto.
-     * @param string $descricao A descrição do produto.
-     * @param float $preco O preço do produto.
-     * @param int $categoria_id O ID da categoria do produto.
-     * @param string|null $caminhoImagem O caminho para a imagem do produto (pode ser nulo).
-     * @return bool Retorna true se a inserção for bem-sucedida, false caso contrário.
-     */
+    public function buscarPorId(int $id)
+    {
+        $sql = "SELECT * FROM cardapio_itens WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
     public function criar(string $nome, string $descricao, float $preco, int $categoria_id, ?string $caminhoImagem): bool
     {
-        // A query SQL com placeholders (?) para os valores
         $sql = "INSERT INTO cardapio_itens (nome, descricao, preco, categoria_id, imagem_url) VALUES (?, ?, ?, ?, ?)";
 
         try {
-            // Prepara a query para execução
             $stmt = $this->pdo->prepare($sql);
             
-            // Executa a query, substituindo os placeholders pelos valores reais de forma segura
             $stmt->execute([
                 $nome,
                 $descricao,
@@ -49,14 +38,53 @@ class ProdutoModel
                 $caminhoImagem
             ]);
 
-            return true; // Retorna true se a execução foi um sucesso
+            return true; 
 
         } catch (PDOException $e) {
-            // Linha de debug para mostrar o erro exato do banco de dados
             die('ERRO DE BANCO DE DADOS: ' . $e->getMessage());
 
-            // error_log($e->getMessage());
             return false;
         }
     }
+    public function atualizar(int $id, array $dados): bool
+    {
+        $sql = "UPDATE cardapio_itens SET 
+                    nome = :nome, 
+                    descricao = :descricao, 
+                    preco = :preco, 
+                    categoria_id = :categoria_id, 
+                    imagem_url = :imagem_url 
+                WHERE id = :id";
+        
+        try {
+            $stmt = $this->pdo->prepare($sql);
+
+            $stmt->bindValue(':nome', $dados['nome']);
+            $stmt->bindValue(':descricao', $dados['descricao']);
+            $stmt->bindValue(':preco', $dados['preco']);
+            $stmt->bindValue(':categoria_id', $dados['categoria_id'], PDO::PARAM_INT);
+            $stmt->bindValue(':imagem_url', $dados['imagem_url']); // CRUCIAL
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Erro ao atualizar produto: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function listarTodos()
+    {
+        $stmt = $this->pdo->query("SELECT * FROM cardapio_itens ORDER BY nome ASC");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function excluir(int $id): bool
+    {
+        $sql = "DELETE FROM cardapio_itens WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+
 }

@@ -9,15 +9,16 @@ class Router
 
     public function __construct()
     {
-        // Rota principal
+
         $this->add('/', ['controller' => 'HomeController', 'action' => 'index']);
 
-        // Rotas de produtos
         $this->add('/cardapio', ['controller' => 'CardViewController', 'action' => 'index']);
         $this->add('/produtos/criar', ['controller' => 'ProdutoController', 'action' => 'criar']);
         $this->add('/produtos/salvar', ['controller' => 'ProdutoController', 'action' => 'salvar']);
         $this->add('/produtos/excluir/{id}', ['controller' => 'ProdutoController', 'action' => 'excluir']);
         $this->add('/produtos', ['controller' => 'ProdutoController', 'action' => 'listar']);
+        $this->add('/produtos/editar/{id}', ['controller' => 'ProdutoController', 'action' => 'editar']);
+        $this->add('/produtos/atualizar', ['controller' => 'ProdutoController', 'action' => 'atualizar']);
     }
 
     public function add($route, $params = [])
