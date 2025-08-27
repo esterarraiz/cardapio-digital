@@ -153,6 +153,8 @@
             <div class="alert-success">✅ Produto salvo com sucesso!</div>
         <?php elseif ($_GET['status'] === 'excluido'): ?>
             <div class="alert-success">✅ Produto excluído com sucesso!</div>
+        <?php elseif ($_GET['status'] === 'atualizado'): ?>
+            <div class="alert-success">✅ Produto atualizado com sucesso!</div>
         <?php elseif ($_GET['status'] === 'erro'): ?>
             <div class="alert-error">❌ Ocorreu um erro ao tentar excluir o produto.</div>
         <?php endif; ?>
