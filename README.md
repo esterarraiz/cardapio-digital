@@ -48,7 +48,7 @@ O principal objetivo deste projeto é aplicar os conceitos e práticas de Engenh
 ## 💻 Tecnologias Utilizadas
 - **Backend:** PHP 8.1+  
 - **Banco de Dados:** PostgreSQL (via Supabase)  
-- **Frontend:** HTML5, CSS3, JavaScript  
+- **Frontend:** HTML5, CSS3 
 - **Gerenciador de Dependências:** Composer  
 - **Arquitetura:** MVC (Model-View-Controller)  
 
