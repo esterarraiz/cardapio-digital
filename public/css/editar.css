@@ -1,0 +1,142 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    --cor-primaria: #4f46e5;
+    --cor-fundo: #f8f9fa;
+    --cor-texto: #344054;
+    --cor-borda: #d0d5dd;
+    --cor-branca: #ffffff;
+    --sombra-caixa: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1em;
+    box-sizing: border-box;
+}
+
+.container {
+    background: var(--cor-branca);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--sombra-caixa);
+    width: 100%;
+    max-width: 500px;
+    animation: fadeIn 0.4s ease-out;
+}
+
+h1 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #101828;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+
+form label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    display: block;
+    font-size: 0.9rem;
+}
+
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    margin-bottom: 1.2rem;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.2s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: var(--cor-primaria);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.input-file-wrapper {
+    margin-bottom: 1.2rem;
+}
+
+input[type="file"] {
+    display: none; 
+}
+
+.input-file-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    border: 2px dashed var(--cor-borda);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.input-file-label:hover {
+    border-color: var(--cor-primaria);
+    background-color: #f9fafb;
+}
+
+.file-name {
+    margin-left: 10px;
+    font-size: 0.9rem;
+    color: #667085;
+}
+
+/* --- Botão Principal e Link de Cancelar --- */
+button[type="submit"] {
+    width: 100%;
+    background: var(--cor-primaria);
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+button[type="submit"]:hover {
+    background: #4338ca;
+}
+
+button[type="submit"]:active {
+    transform: scale(0.98);
+}
+
+.cancelar {
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+    color: #667085;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.cancelar:hover {
+    color: var(--cor-primaria);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}

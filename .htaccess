@@ -1,0 +1,17 @@
+RewriteEngine On
+
+Options -Indexes
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule . public/index.php [L]
+
+<Files .htaccess>
+    Require all denied
+</Files>
+
+<Files ~ "\.(env|log|ini)$">
+    Require all denied
+</Files>

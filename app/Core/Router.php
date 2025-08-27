@@ -1,5 +1,4 @@
 <?php
-// Em: app/Core/Router.php
 
 namespace App\Core;
 
@@ -10,15 +9,23 @@ class Router
 
     public function __construct()
     {
-        // Rota principal da aplicação
+
         $this->add('/', ['controller' => 'HomeController', 'action' => 'index']);
-        
-        // Adicione outras rotas de exemplo se quiser
-        // $this->add('/produtos', ['controller' => 'ProdutoController', 'action' => 'listar']);
+
+        $this->add('/cardapio', ['controller' => 'CardViewController', 'action' => 'index']);
+        $this->add('/produtos/criar', ['controller' => 'ProdutoController', 'action' => 'criar']);
+        $this->add('/produtos/salvar', ['controller' => 'ProdutoController', 'action' => 'salvar']);
+        $this->add('/produtos/excluir/{id}', ['controller' => 'ProdutoController', 'action' => 'excluir']);
+        $this->add('/produtos', ['controller' => 'ProdutoController', 'action' => 'listar']);
+        $this->add('/produtos/editar/{id}', ['controller' => 'ProdutoController', 'action' => 'editar']);
+        $this->add('/produtos/atualizar', ['controller' => 'ProdutoController', 'action' => 'atualizar']);
     }
 
     public function add($route, $params = [])
     {
+        
+        $route = str_replace('{id}', '(\d+)', $route);
+       
         $route = preg_replace('/\//', '\\/', $route);
         $route = '/^' . $route . '$/i';
         $this->routes[$route] = $params;
@@ -27,8 +34,12 @@ class Router
     public function match($url)
     {
         foreach ($this->routes as $route => $params) {
-            if (preg_match($route, $url)) {
+            if (preg_match($route, $url, $matches)) {
                 $this->params = $params;
+                
+                if (isset($matches[1])) {
+                    $this->params['id'] = $matches[1];
+                }
                 return true;
             }
         }
@@ -37,12 +48,7 @@ class Router
 
     public function dispatch()
     {
-        // AQUI ESTÁ A CORREÇÃO:
-        // Usamos parse_url para pegar o caminho da URL de forma segura,
-        // o que garante que a barra "/" da página inicial seja preservada.
         $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
-        // O resto do código permanece, mas agora ele recebe a URL correta.
         $url = $this->removeQueryStringVariables($url);
 
         if ($this->match($url)) {
@@ -53,7 +59,12 @@ class Router
                 $action = $this->params['action'];
 
                 if (method_exists($controller_object, $action)) {
-                    $controller_object->$action();
+                    
+                    if (isset($this->params['id'])) {
+                        $controller_object->$action($this->params['id']);
+                    } else {
+                        $controller_object->$action();
+                    }
                 } else {
                     echo "Action '$action' não encontrada no controller '$controller'";
                 }
