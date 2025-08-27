@@ -54,7 +54,7 @@ O principal objetivo deste projeto é aplicar os conceitos e práticas de Engenh
 
 ## 🎥 Vídeo de Apresentação
 Assista ao vídeo de apresentação do nosso projeto, onde demonstramos as funcionalidades e explicamos a arquitetura do sistema.
-
+https://drive.google.com/file/d/14b0xUAFVPUmXZmBEkvBOXQHb22GtGGrG/view?usp=sharing
 ## 🚀 Configuração e Execução Local
 
 ### Pré-requisitos
