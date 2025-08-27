@@ -32,18 +32,23 @@ O principal objetivo deste projeto é aplicar os conceitos e práticas de Engenh
 
 ## ✅ Requisitos Implementados
 
-### Gerenciamento de Produtos (CRUD Completo)
-- [X] **Criação:** Adicionar novos itens ao cardápio com nome, descrição, preço, categoria e imagem.  
-- [X] **Leitura:** Listar todos os produtos cadastrados de forma organizada.  
-- [X] **Atualização:** Editar todas as informações de um produto existente, incluindo a substituição da imagem.  
-- [X] **Exclusão:** Remover produtos do cardápio.  
+| **Funcionalidade**                               | **Descrição**                                                                                      | **Responsável**                           |
+|--------------------------------------------------|--------------------------------------------------------------------------------------------------|-------------------------------------------|
+| **Criação (Create)**                             | Adicionar novos itens ao cardápio com nome, descrição, preço, categoria e imagem.               | Ester Arraiz de Matos (Formulário) <br> Arthur Vinicíus de Oliveira Carvalho (Lógica) |
+| **Leitura (Read)**                                | Listar todos os produtos cadastrados de forma organizada.                                       | Jorge Antônio Motta Braga                 |
+| **Atualização (Update)**                          | Editar todas as informações de um produto existente, incluindo a substituição da imagem.        | Matheus Henrique de Freitas              |
+| **Exclusão (Delete)**                             | Remover produtos do cardápio.                                                                    | Vitória Maria Reis Fontana               |
+| **Gerenciamento de Categorias**                   | Associação de produtos a categorias (Ex: Lanches, Bebidas, Sobremesas).                         | **Todos**                                |
+| **Upload de Imagens**                             | Sistema de upload para associar uma imagem a cada produto.                                      | **Todos**                                |
 
-### Gerenciamento de Categorias
-- [X] Os produtos são associados a categorias (Ex: Lanches, Bebidas, Sobremesas) para melhor organização.  
 
-### Upload de Imagens
-- [X] Sistema de upload para associar uma imagem a cada produto.  
+# 🔄 Ciclo de Revisão
 
+## Arthur Vinicíus ➡️ revisa o código da Ester  
+## Ester ➡️ revisa o código do Jorge  
+## Jorge ➡️ revisa o código do Matheus  
+## Matheus ➡️ revisa o código da Vitória  
+## Vitória ➡️ revisa o código do Arthur
 
 ## 💻 Tecnologias Utilizadas
 - **Backend:** PHP 8.1+  
