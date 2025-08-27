@@ -19,21 +19,17 @@ ini_set('display_errors', 0);
         .text-brand-orange { color: var(--brand-orange); }
         .text-brand-green { color: var(--brand-green); }
         .bg-brand-orange { background-color: var(--brand-orange); }
+        .bg-neutral-dark { background-color: var(--brand-orange); }
     </style>
 </head>
 <body class="bg-neutral-lightest font-sans">
 
     <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-4xl">
         <header class="text-center mb-8">
-            <h1 class="text-5xl font-bold text-neutral-dark mt-4">Nosso Cardápio</h1>
+            <h1 class="text-5xl font-bold text-neutral-dark mt-4">Cardápio:</h1>
         </header>
 
-        <div class="mb-6 text-right">
-            <a href="/produtos/criar" 
-               class="inline-block bg-brand-orange text-white font-bold py-2 px-5 rounded-lg hover:bg-orange-600 transition-colors shadow-sm">
-                + Adicionar Novo Produto
-            </a>
-        </div>
+        
 
         <main class="space-y-8">
 
@@ -83,17 +79,6 @@ ini_set('display_errors', 0);
                                         <?php if (!empty($item['descricao'])): ?>
                                             <p class="text-neutral-medium text-sm mt-1"><?php echo htmlspecialchars($item['descricao']); ?></p>
                                         <?php endif; ?>
-                                        <div class="mt-4 flex items-center space-x-2">
-                                            <a href="/produtos/editar/<?php echo $item['id']; ?>" 
-                                               class="text-xs font-semibold bg-slate-200 text-slate-700 hover:bg-slate-300 rounded-md py-1 px-3 transition-colors">
-                                                Editar
-                                            </a>
-                                            <a href="/produtos/excluir/<?php echo $item['id']; ?>" 
-                                               class="text-xs font-semibold bg-red-100 text-red-700 hover:bg-red-200 rounded-md py-1 px-3 transition-colors" 
-                                               onclick="return confirm('Tem certeza que deseja excluir este item?');">
-                                                Excluir
-                                            </a>
-                                        </div>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
@@ -104,5 +89,13 @@ ini_set('display_errors', 0);
 
         </main>
     </div>
+    <a href="/produtos" 
+       title="Gerenciar Cardápio"
+       class="fixed bottom-6 right-6 bg-neutral-dark text-white p-3 rounded-full shadow-lg hover:bg-neutral-dark/80 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+    </a>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Cardápio Digital</title>
+    <title>Gerenciamento do Cardápio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -24,6 +24,25 @@
             text-align: center;
             margin-bottom: 20px;
             color: #333;
+        }
+        .header-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .btn-add {
+            background-color: #6A11CB;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+
+        .btn-add:hover {
+            background-color: #480a8a;
         }
 
         .alert-success {
@@ -122,11 +141,13 @@
         }
     </style>
 </head>
+
 <body>
 <div class="container">
     <h1>Produtos Cadastrados</h1>
-
-    <!-- Mensagens de status -->
+    <div class="header-actions">
+        <a href="/produtos/criar" class="btn-add">+ Adicionar Produto</a>
+    </div>
     <?php if (isset($_GET['status'])): ?>
         <?php if ($_GET['status'] === 'sucesso'): ?>
             <div class="alert-success">✅ Produto salvo com sucesso!</div>
@@ -137,7 +158,6 @@
         <?php endif; ?>
     <?php endif; ?>
 
-    <!-- Lista de produtos -->
     <?php if (!empty($produtos)): ?>
         <?php foreach ($produtos as $produto): ?>
             <div class="card">

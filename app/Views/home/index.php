@@ -14,7 +14,7 @@
         <div class="landing-content">
             <h1>Cardápio Digital</h1>
             <p>Descubra sabores incríveis.</p>
-            <a href="/produtos" class="cta-button">Ver Cardápio</a>
+            <a href="/cardapio" class="cta-button">Ver Cardápio</a>
         </div>
     </div>
 </body>
